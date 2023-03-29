@@ -64,7 +64,7 @@ def verzamel_wat_statistieken():
 
 def vraag_om_woord():
   # vul een woord in, als deze leeg, return functie False
-  mijnwoord = input("\nVul een woord in (leeg om te stoppen): ")
+  mijnwoord = input("Vul een woord in (leeg om te stoppen): ")
   if mijnwoord == "":
     return False
   # controle of woord voorkomt in de lijst
@@ -76,7 +76,7 @@ def vraag_om_woord():
   print(f"Controleren of je woord {bcolors.OKGREEN}{mijnwoord}{bcolors.ENDC} onderdeel is van een ander woord ", end='') 
   woord_onderdeel = 0
   for woord in alle_woorden:
-    if mijnwoord in woord and mijnwoord != woord:
+    if mijnwoord in woord:
       print(".", end='')
       woord_onderdeel += 1
   if woord_onderdeel > 0:
@@ -84,41 +84,26 @@ def vraag_om_woord():
   else:
     print(f"\n{bcolors.WARNING}Niet gevonden dat deze ergens onderdeel van is{bcolors.ENDC}")
   # welke woorden kan je maken met letters van het woord
+  for woord in alle_woorden:
+    if(sorted(woord)== sorted(mijnwoord)):
+        print(f"{bcolors.OKGREEN}{woord}{bcolors.ENDC} is een anagram van {bcolors.OKBLUE}{mijnwoord}{bcolors.ENDC}")
+  
   """
-  # zet mijnwoord in set
-  set_mijnwoord = set(mijnwoord)
+   # zet mijnwoord in set
+   set_mijnwoord = set(mijnwoord)
   for woord in alle_woorden:
     set_woord = set(woord)
     if set_woord == set_mijnwoord and len(woord) == len(mijnwoord):
       print(f"{bcolors.OKGREEN}{woord}{bcolors.ENDC} kan worden gemaakt uit {bcolors.OKBLUE}{mijnwoord}{bcolors.ENDC}")
   """
-  print (f"Zoeken naar anagrammen van het woord {bcolors.OKGREEN}{mijnwoord}{bcolors.ENDC}")
-  list_mijnwoord = list(mijnwoord)
-  list_mijnwoord.sort()
-  for woord in alle_woorden:
-    if len(woord) != len(mijnwoord):
-      continue
-    elif woord == mijnwoord:
-      continue
-    list_woord = list(woord)
-    list_woord.sort()
-    if list_mijnwoord == list_woord:
-      print(f"{bcolors.OKGREEN}{woord}{bcolors.ENDC}",end=' ')
-  print("")
-
-  """
-  input("Druk op ENTER om verder te gaan")
   # wat rijmt er op dit woord?
-  rijm_mijnwoord = mijnwoord[-2:]
-  print(f"Mijn woord {bcolors.OKBLUE}{mijnwoord}{bcolors.ENDC} rijmt op",end=' ')
+  rijm_mijnwoord = mijnwoord[-3:]
   for woord in alle_woorden:
-    rijm_woord = woord[-2:]
+    rijm_woord = woord[-3:]
     if rijm_mijnwoord == rijm_woord:
-      print(f"{bcolors.OKGREEN}{woord}{bcolors.ENDC}",end=' ')
-
-  print("")
-  """
+      print(f"Mijn woord {bcolors.OKBLUE}{mijnwoord}{bcolors.ENDC} rijmt op {bcolors.OKGREEN}{woord}{bcolors.ENDC}")
   return True
+
 
 # laat eerst wat info van de lijst zien
 verzamel_wat_statistieken()
